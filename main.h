@@ -45,15 +45,15 @@ va_list list, char buffer[], int flags, int width, int precision, int size);
 /****************** FUNCTIONS_TO_PRINT ******************/
 
 /*chars and strings */
-int p_char(va_list types, char buffer[],
+int print_char(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
-int p_string(va_list types, char buffer[],
+int print_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
-int p_percent(va_list types, char buffer[],
+int print_percent(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 
 /*numbers */
-int p_int(va_list types, char buffer[],
+int print_int(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 
 /* Funciotns to handle other specifiers */
