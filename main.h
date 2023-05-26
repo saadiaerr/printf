@@ -40,21 +40,21 @@ struct fmt
 typedef struct fmt fmt_t;
 
 int _printf(const char *format, ...);
-va_list list, char buffer[], int flags, int width, int precision, int size);
+va_list l, char b[], int f, int w, int p, int size);
 
 /****************** FUNCTIONS_TO_PRINT ******************/
 
 /*chars and strings */
-int print_char(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_string(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
-int print_percent(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+int print_char(va_list t, char b[],
+	int f, int w, int p, int size);
+int print_string(va_list t, char b[],
+	int f, int w, int p, int size);
+int print_percent(va_list t, char b[],
+	int f, int w, int p, int size);
 
 /*numbers */
-int print_int(va_list types, char buffer[],
-	int flags, int width, int precision, int size);
+int print_int(va_list t, char b[],
+	int f, int w, int p, int size);
 
 /* Funciotns to handle other specifiers */
 int get_flags(const char *format, int *i);
