@@ -1,64 +1,48 @@
 #include "main.h"
-void print_buffer(char b[], int *buff_ind);
+
 /**
- * _printf - Print a function
- * @format: format of function
- * Return: Printed character
+ * _printf - prints anything
+ * @format: the format string
+ * Return: number printed
  */
 int _printf(const char *format, ...)
 {
-	int j, pd = 0, pd_s = 0;
-	int f, w, p, size, buff_ind = 0;
-	va_list l;
-	char b[BUFF_SIZE];
+	int tot = 0;
+	va_list ap;
+	char *c, *start;
+	params_t params = PARAMS_INIT;
 
-	if (!format)
+	va_start(ap, format);
+
+	if (format == NULL || (format[0] == '%' && !format[1]))
 		return (-1);
-
-	va_start(l, format);
-
-	for (j = 0; format && format[j] != '\0'; j++)
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (C = (char *)format; *C; C++)
 	{
-		if (format[j] != '%')
+		init_params(&params, ap);
+		if (*C != '%')
 		{
-			b[buff_ind++] = format[j];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(b, &buff_ind);
-			/* write(1, &format[j], 1);*/
-			pd_s++;
+			tot += _putchar(*C);
+			continue;
 		}
+		start = c;
+		c++;
+		while (get_flag(c, &params)) /* while char at p is flag char */
+		{
+			c++; /* next char */
+		}
+		c = get_width(c, &params, ap);
+		c = get_precision(c, &params, ap);
+		if (get_modifier(c, &params))
+			c++;
+		if (!get_specifier(c))
+			tot += print_from_to(start, c,
+				params.l_modifier || params.h_modifier ? c - 1 : 0);
 		else
-		{
-			print_buffer(b, &buff_ind);
-			f = get_flags(format, &j);
-			w = get_width(format, &j, l);
-			p = get_precision(format, &j, l);
-			size = get_size(format, &j);
-			++j;
-			pd = handle_print(format, &j, list, buffer,
-				f, w, p, size);
-			if (pd == -1)
-				return (-1);
-			pd_s += pd;
-		}
+			tot += get_print_func(c, ap, &params);
 	}
-
-	print_buffer(b, &buff_ind);
-
-	va_end(l);
-
-	return (pd_s);
-}
-
-/**
- * print_buffer - Prints the contents of the buffer
- * @buffer: Array of characters
- * @buff_ind: Index
- */
-void print_buffer(char b[], int *buff_ind)
-{
-	if (*buff_ind > 0)
-		write(1, &b[0], *buff_ind);
-
-	*buff_ind = 0;
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (tot);
 }
