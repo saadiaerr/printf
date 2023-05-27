@@ -68,13 +68,12 @@ int print_string(va_list t, char b[], int f, int w, int p, int size)
 			return (w);
 		}
 	}
-
 	return (write(1, s, len));
 }
 
 
 /**
- * p_percent - Print percent sign
+ * print_percent - Print percent sign
  * @t: List
  * @b: array Buffer
  * @f: flags
