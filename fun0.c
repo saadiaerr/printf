@@ -135,3 +135,49 @@ int print_int(va_list t, char b[],
 
 	return (write_number(nega, y, b, f, w, p, size));
 }
+
+
+/**
+ * print_binary - Print number
+ * @t: Liste
+ * @b: Buffer array
+ * @f: flags
+ * @w: width
+ * @p: Precision
+ * @size: Size
+ * Return: Numbers of char
+ */
+int print_binary(va_list t, char b[],
+	int f, int w, int p, int size)
+{
+	unsigned int z, s, y, tot;
+	unsigned int a[32];
+	int cnt;
+
+	UNUSED(b);
+	UNUSED(f);
+	UNUSED(w);
+	UNUSED(p);
+	UNUSED(size);
+
+	z = va_arg(t, unsigned int);
+	s = 2147483648; /* (2 ^ 31) */
+	a[0] = z / s;
+	for (y = 1; y < 32; y++)
+	{
+		s /= 2;
+		a[y] = (z / s) % 2;
+	}
+	for (y = 0, tot = 0, cnt = 0; y < 32; y++)
+	{
+		tot += a[y];
+		if (tot || y == 31)
+		{
+			char l = '0' + a[y];
+
+			write(1, &l, 1);
+			cnt++;
+		}
+	}
+	return (cnt);
+}

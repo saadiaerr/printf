@@ -1,66 +1,64 @@
 #include "main.h"
-
-void print_buffer(char buffer[], int *buff_ind);
-
+void print_buffer(char b[], int *buff_ind);
 /**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
+ * _printf - Print a function
+ * @format: format of function
+ * Return: Printed character
  */
 int _printf(const char *format, ...)
 {
 	int j, pd = 0, pd_s = 0;
-	int fg, wth, pre, size, buff_ind = 0;
-	va_list list;
-	char buffer[BUFF_SIZE];
+	int f, w, p, size, buff_ind = 0;
+	va_list l;
+	char b[BUFF_SIZE];
 
-	if (format == NULL)
+	if (!format)
 		return (-1);
 
-	va_start(list, format);
+	va_start(l, format);
 
 	for (j = 0; format && format[j] != '\0'; j++)
 	{
 		if (format[j] != '%')
 		{
-			buffer[buff_ind++] = format[j];
+			b[buff_ind++] = format[j];
 			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
+				print_buffer(b, &buff_ind);
 			/* write(1, &format[j], 1);*/
 			pd_s++;
 		}
 		else
 		{
-			print_buffer(buffer, &buff_ind);
-			fg = get_flags(format, &j);
-			wth = get_width(format, &j, list);
-			pre = get_precision(format, &j, list);
+			print_buffer(b, &buff_ind);
+			f = get_flags(format, &j);
+			w = get_width(format, &j, l);
+			p = get_precision(format, &j, l);
 			size = get_size(format, &j);
 			++j;
 			pd = handle_print(format, &j, list, buffer,
-				fg, wth, pre, size);
+				f, w, p, size);
 			if (pd == -1)
 				return (-1);
 			pd_s += pd;
 		}
 	}
 
-	print_buffer(buffer, &buff_ind);
+	print_buffer(b, &buff_ind);
 
-	va_end(list);
+	va_end(l);
 
 	return (pd_s);
 }
 
 /**
- * print_buffer - Prints the contents of the buffer if it exist
- * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
+ * print_buffer - Prints the contents of the buffer
+ * @buffer: Array of characters
+ * @buff_ind: Index
  */
-void print_buffer(char buffer[], int *buff_ind)
+void print_buffer(char b[], int *buff_ind)
 {
 	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
+		write(1, &b[0], *buff_ind);
 
 	*buff_ind = 0;
 }
