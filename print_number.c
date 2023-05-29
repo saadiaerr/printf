@@ -1,5 +1,3 @@
-print number
-
 #include "main.h"
 
 /**
@@ -117,9 +115,9 @@ int print_number_left_shift(char *str, params_t *params)
 		neg = 0;
 
 	if (params->plus_flag && !neg2 && !params->unsign)
-		s += _putchar('+'), y++;
+		s += _putchar('+'), z++;
 	else if (params->space_flag && !neg2 && !params->unsign)
-		s += _putchar(' '), y++;
+		s += _putchar(' '), z++;
 	s += _puts(str);
 	while (z++ < params->width)
 		s += _putchar(pad_char);

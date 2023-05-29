@@ -1,5 +1,3 @@
-print functions
-
 #include "main.h"
 
 /**
