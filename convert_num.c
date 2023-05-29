@@ -3,7 +3,7 @@
 #include "main.h"
 
 /**
- * print_hex - prints unsigned hexa in lowercase
+ * print_hex - prints unsigned hexadicimal in lowercase
  * @ap: the argument pointer
  * @params: the parameters
  * Return: bytes

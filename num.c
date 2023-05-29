@@ -1,8 +1,7 @@
 #include "main.h"
-
 /**
  * convert - converter function
- * @num: number
+ * @num: number to check
  * @base: base
  * @flags: flags
  * @params: paramater
