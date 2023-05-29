@@ -10,19 +10,19 @@
  */
 int print_hex(va_list ap, params_t *params)
 {
-	unsigned long j;
+	unsigned long l;
 	int i = 0;
 	char *c;
 
 	if (params->l_modifier)
-		j = (unsigned long)va_arg(ap, unsigned long);
+		l = (unsigned long)va_arg(ap, unsigned long);
 	else if (params->h_modifier)
-		j = (unsigned short int)va_arg(ap, unsigned int);
+		l = (unsigned short int)va_arg(ap, unsigned int);
 	else
-		j = (unsigned int)va_arg(ap, unsigned int);
+		l = (unsigned int)va_arg(ap, unsigned int);
 
-	c = convert(j, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
-	if (params->hashtag_flag && j)
+	c = convert(l, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
+	if (params->hashtag_flag && l)
 	{
 		*--c = 'i';
 		*--c = '0';
@@ -41,19 +41,19 @@ int print_hex(va_list ap, params_t *params)
  */
 int print_HEX(va_list ap, params_t *params)
 {
-	unsigned long j;
+	unsigned long l;
 	int i = 0;
 	char *c;
 
 	if (params->l_modifier)
-		j = (unsigned long)va_arg(ap, unsigned long);
+		l = (unsigned long)va_arg(ap, unsigned long);
 	else if (params->h_modifier)
-		j = (unsigned short int)va_arg(ap, unsigned int);
+		l = (unsigned short int)va_arg(ap, unsigned int);
 	else
-		j = (unsigned int)va_arg(ap, unsigned int);
+		l = (unsigned int)va_arg(ap, unsigned int);
 
-	c = convert(j, 16, CONVERT_UNSIGNED, params);
-	if (params->hashtag_flag && j)
+	c = convert(l, 16, CONVERT_UNSIGNED, params);
+	if (params->hashtag_flag && l)
 	{
 		*--c = 'I';
 		*--c = '0';
@@ -88,19 +88,19 @@ int print_binary(va_list ap, params_t *params)
  */
 int print_octal(va_list ap, params_t *params)
 {
-	unsigned long j;
+	unsigned long l;
 	char *jh;
 	int s = 0;
 
 	if (params->l_modifier)
-		j = (unsigned long)va_arg(ap, unsigned long);
+		l = (unsigned long)va_arg(ap, unsigned long);
 	else if (params->h_modifier)
-		j = (unsigned short int)va_arg(ap, unsigned int);
+		l = (unsigned short int)va_arg(ap, unsigned int);
 	else
-		j = (unsigned int)va_arg(ap, unsigned int);
-	jh = convert(j, 8, CONVERT_UNSIGNED, params);
+		l = (unsigned int)va_arg(ap, unsigned int);
+	jh = convert(l, 8, CONVERT_UNSIGNED, params);
 
-	if (params->hashtag_flag && j)
+	if (params->hashtag_flag && l)
 		*--jh = '0';
 	params->unsign = 1;
 	return (s += print_number(jh, params));

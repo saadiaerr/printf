@@ -14,7 +14,7 @@ Write a function that produces output according to a format.
 
 5-Handle the following custom conversion
 
-6-Handle the following conversion 
+6-Handle the following conversion
 
 7-Handle the following flag characters for non-custom conversio
 
@@ -22,7 +22,4 @@ Write a function that produces output according to a format.
 
 9-Conversion specifiers to handle: d, i, u, o, x, X
 
-10-Handle the field width for non-custom conversion 
-
-
-
+10-Handle the field width for non-custom conversion
