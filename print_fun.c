@@ -8,7 +8,7 @@
  */
 int print_char(va_list ap, params_t *params)
 {
-	char pad_char = ' ';
+	char pd_char = ' ';
 	unsigned int pd = 1, tot = 0, c = va_arg(ap, int);
 
 	if (params->minus_flag)
@@ -16,7 +16,7 @@ int print_char(va_list ap, params_t *params)
 	while (pd++ < params->width)
 		tot += _putchar(pd_char);
 	if (!params->minus_flag)
-		tot += _putchar(ch);
+		tot += _putchar(c);
 	return (tot);
 }
 

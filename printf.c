@@ -18,12 +18,12 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	for (C = (char *)format; *C; C++)
+	for (c = (char *)format; *c; c++)
 	{
 		init_params(&params, ap);
-		if (*C != '%')
+		if (*c != '%')
 		{
-			tot += _putchar(*C);
+			tot += _putchar(*c);
 			continue;
 		}
 		start = c;
