@@ -1,98 +1,118 @@
-#ifndef _PRINTF_H
-#define _PRINTF_H
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
+#include <stdlib.h>
 
-#define UNUSED(x) (void)(x)
-#define BUFF_SIZE 1024
+#define OUTPUT_BUF_SIZE 1024
+#define BUF_FLUSH -1
 
-/* FLAGS */
-#define F_MINUS 1
-#define F_PLUS 2
-#define F_ZERO 4
-#define F_HASH 8
-#define F_SPACE 16
 
-/* SIZES */
-#define S_LONG 2
-#define S_SHORT 1
+#define NULL_STRING "(null)"
 
-/**
- * struct fmt - Struct op
- * @fmt: The format.
- * @fn: The function associated.
- */
-struct fmt
-{
-	char fmt;
-	int (*fn)(va_list, char[], int, int, int, int);
-};
+#define PARAMS_INIT {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
+#define CONVERT_LOWERCASE	1
+#define CONVERT_UNSIGNED	2
 
 /**
- * typedef struct fmt fmt_t - Struct op
+ * struct parameters - parameters struct
  *
- * @fmt: The format.
- * @fm_t: The function associated.
+ * @unsign: flag if unsigned value
+ *
+ * @plus_flag: on if plus_flag specified
+ * @space_flag: on if hashtag_flag specified
+ * @hashtag_flag: on if _flag specified
+ * @zero_flag: on if _flag specified
+ * @minus_flag: on if _flag specified
+ *
+ * @width: field width specified
+ * @precision: field precision specified
+ *
+ * @h_modifier: on if h_modifier is specified
+ * @l_modifier: on if l_modifier is specified
+ *
  */
-typedef struct fmt fmt_t;
+typedef struct parameters
+{
+	unsigned int unsign			: 1;
 
+	unsigned int plus_flag		: 1;
+	unsigned int space_flag		: 1;
+	unsigned int hashtag_flag	: 1;
+	unsigned int zero_flag		: 1;
+	unsigned int minus_flag		: 1;
+
+	unsigned int width;
+	unsigned int precision;
+
+	unsigned int h_modifier		: 1;
+	unsigned int l_modifier		: 1;
+} params_t;
+
+/**
+ * struct specifier - Struct token
+ *
+ * @specifier: format token
+ * @f: The function associated
+ */
+typedef struct specifier
+{
+	char *specifier;
+	int (*f)(va_list, params_t *);
+} specifier_t;
+
+/* _put.c module */
+int _puts(char *str);
+int _putchar(int c);
+
+/* print_functions.c module */
+int print_char(va_list ap, params_t *params);
+int print_int(va_list ap, params_t *params);
+int print_string(va_list ap, params_t *params);
+int print_percent(va_list ap, params_t *params);
+int print_S(va_list ap, params_t *params);
+
+/* number.c module */
+char *convert(long int num, int base, int flags, params_t *params);
+int print_unsigned(va_list ap, params_t *params);
+int print_address(va_list ap, params_t *params);
+
+/* specifier.c module */
+int (*get_specifier(char *s))(va_list ap, params_t *params);
+int get_print_func(char *s, va_list ap, params_t *params);
+int get_flag(char *s, params_t *params);
+int get_modifier(char *s, params_t *params);
+char *get_width(char *s, params_t *params, va_list ap);
+
+/* convert_number.c module */
+int print_hex(va_list ap, params_t *params);
+int print_HEX(va_list ap, params_t *params);
+int print_binary(va_list ap, params_t *params);
+int print_octal(va_list ap, params_t *params);
+
+/* simple_printers.c module */
+int print_from_to(char *start, char *stop, char *except);
+int print_rev(va_list ap, params_t *params);
+int print_rot13(va_list ap, params_t *params);
+
+/* print_number.c module */
+int _isdigit(int c);
+int _strlen(char *s);
+int print_number(char *str, params_t *params);
+int print_number_right_shift(char *str, params_t *params);
+int print_number_left_shift(char *str, params_t *params);
+
+/* params.c module */
+void init_params(params_t *params, va_list ap);
+
+/* string_fields.c modoule */
+char *get_precision(char *p, params_t *params, va_list ap);
+
+/* _prinf.c module */
 int _printf(const char *format, ...);
-va_list l, char b[], int f, int w, int p, int size);
 
-/****************** FUNCTIONS_TO_PRINT ******************/
-
-/*chars and strings */
-int print_char(va_list t, char b[],
-	int f, int w, int p, int size);
-int print_string(va_list t, char b[],
-	int f, int w, int p, int size);
-int print_percent(va_list t, char b[],
-	int f, int w, int p, int size);
-
-/*numbers */
-int print_int(va_list t, char b[],
-	int f, int w, int p, int size);
-int print_binary(va_list t, char b[],
-	int f, int w, int p, int size);
-int print_unsigned(va_list t, char b[],
-	int f, int w, int p, int size);
-int print_octal(va_list t, char b[],
-	int f, int w, int p, int size);
-int print_hexadecimal(va_list t, char b[],
-	int f, int w, int p, int size);
-int print_hexa_upper(va_list t, char b[],
-	int f, int w, int p, int size);
-
-int print_hexa(va_list t, char map_to[],
-char b[], int f, char flag_character, int w, int p, int size);
-
-/* Funciotns to handle other specifiers */
-int get_flags(const char *f, int *y);
-int get_width(const char *f, int *y, va_list l);
-int get_precision(const char *f, int *y, va_list l);
-int get_size(const char *f, int *y);
-
-/*Function to print string in reverse*/
-int print_reverse(va_list t, char b[],
-	int f, int w, int p, int size);
-
-/* Function to print non printable characters */
-int print_non_printable(va_list t, char b[],
-	int f, int wh, int p, int size);
-
-
-/* Funcion to print a memory address */
-int print_pointer(va_list t, char b[],
-	int f, int w, int p, int size);
-
-/*Function to print a string in rot */
-int print_rot13string(va_list t, char b[],
-	int f, int w, int p, int size);
-
-/* width handler */
-int handle_write_char(char cha, char b[],
-	int f, int w, int p, int size);
-int write_number(int _positive, int ind, char b[],
-	int f, int w, int p, int si
+#endif
