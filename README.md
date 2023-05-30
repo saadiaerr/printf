@@ -23,3 +23,5 @@ Write a function that produces output according to a format.
 9-Conversion specifiers to handle: d, i, u, o, x, X
 
 10-Handle the field width for non-custom conversion
+
+ALL INFORMATIONS ABOUT PRINTF PROJECT
