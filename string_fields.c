@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * get_precision - find the precision in format string
+ * get_precision - find the precision in format strings
  * @p: string form
  * @params: parameters
  * @ap: argument
