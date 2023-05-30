@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * init_params - clears struct and reset buf
+ * init_params - clears struct and reset buffer
  * @params: parameters
  * @ap: the argument
  * Return: void
