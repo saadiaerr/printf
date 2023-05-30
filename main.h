@@ -19,6 +19,7 @@
 #define CONVERT_UNSIGNED	2
 
 /**
+ * all prototypes we need
  * struct parameters - parameters struct
  *
  * @unsign: flag if unsigned value
