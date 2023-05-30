@@ -3,7 +3,7 @@
 #include "main.h"
 
 /**
- * main - Entry point
+ * main - Entry point code checker
  *
  * Return: Always 0
  */
