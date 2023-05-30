@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * _puts - print a string
+ * _puts - print a strings
  * @str: string
  * Return: void
  */
@@ -14,7 +14,7 @@ int _puts(char *str)
 }
 
 /**
- * _putchar - writes the character
+ * _putchar - writes the characters
  * @c: character
  * Return: success 1, error, -1 is returned, and err no is set appropriately.
  */
