@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _printf - prints anything
+ * _printf - prints anything our object
  * @format: the format string
  * Return: number printed
  */
