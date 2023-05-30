@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * convert - converter function
+ * convert - converter function we need
  * @num: number to check
  * @base: base
  * @flags: flags
