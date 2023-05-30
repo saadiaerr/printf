@@ -21,7 +21,7 @@ int print_from_to(char *start, char *stop, char *except)
 }
 
 /**
- * print_rev - string in reverse
+ * print_rev - string in reverse yes
  * @ap: string
  * @params: parameters
  * Return: number bytes
