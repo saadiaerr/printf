@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * get_specifier - finds format of a function
+ * get_specifier - finds format of a function yes
  * @s: string format
  * Return: the number of bytets
  */
