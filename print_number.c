@@ -24,7 +24,7 @@ int _strlen(char *s)
 }
 
 /**
- * print_number - prints a number
+ * print_number - prints a numberrr
  * @str: string
  * @params: parameter
  * Return: chars printed
